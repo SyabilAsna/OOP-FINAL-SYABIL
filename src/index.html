@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Weather Information</title>
+  </head>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      font-size: 20px;
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.65),
+          rgba(0, 0, 0, 0.65)
+        ),
+        url(https://wallpaperaccess.com/full/1392629.jpg);
+    }
+
+    /*to make a javascript output display in box*/
+    .info-box {
+      margin-top: 100px;
+  background-color: #f2f2f2;
+  border: 1px solid #ddd;
+  width: 500px;
+  height: 470px;
+  text-align: center;
+  margin-left: 500px;
+  border-radius: 30px
+}
+  </style>
+  <body>
+    <div class="info-box">
+      <h1>Weather Information</h1>
+      <label for="city-select">Select a city:</label><br>
+      <select id="city-select">
+        <option value="">-- Select a city : --</option>
+        <option value="Marrakesh">Marrakesh</option>
+        <option value="Fes">Fes</option>
+        <option value="Casablanca">Casablanca</option>
+        <option value="Santa Cruz">Santa Cruz</option>
+        <option value="Agadir">Agadir</option>
+        <option value="Essaouira">Essaouira</option>
+        <option value="Chefchaouen">Chefchaouen</option>
+        <option value="Zagora">Zagora</option>
+        <option value="Safi">Safi</option>
+        <option value="Tinghir">Tinghir</option>
+      </select>
+    <div id="weather-info"></div>
+    <script>
+const apiKey = "9fd7a449d055dba26a982a3220f32aa2";
+const baseUrl = "https://api.openweathermap.org/data/2.5/weather?q=";/*meal API*/
+
+const citySelect = document.getElementById("city-select");
+const weatherInfo = document.getElementById("weather-info");
+
+citySelect.addEventListener("change", () => {
+  const city = citySelect.value;
+  const url = `${baseUrl}${city}&appid=${apiKey}`;
+
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      const name = data.name;
+      const temp = Math.round(data.main.temp - 273.15);
+      const weather = data.weather[0].main;
+      const icon = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
+      const timezoneOffset = data.timezone; // in seconds
+      const sunriseTime = new Date((data.sys.sunrise + timezoneOffset) * 1000)
+        .toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false });
+      const sunsetTime = new Date((data.sys.sunset + timezoneOffset) * 1000)
+        .toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false });
+
+      const html = `
+        <img src="${icon}" alt="${weather}">
+        <h2>City : ${name}</h2>
+        <p>Temperature : ${temp}&deg;C</p>
+        <p>Wheather Status : ${weather}</p>
+        <p>Sunrise Time : ${sunriseTime} (Morocco Time)</p>
+        <p>Sunset Time : ${sunsetTime} (Morocco Time)</p>
+      `;
+
+      weatherInfo.innerHTML = html;
+    })
+    .catch((error) => console.error(error));
+});
+
+    </script>
+    </div>
+  </body>
+</html>

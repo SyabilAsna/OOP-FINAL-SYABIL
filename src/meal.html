@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<center>
+	<style>
+		body{
+			font-family: Arial, Helvetica, sans-serif;
+			background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
+    url(https://c0.wallpaperflare.com/preview/733/466/510/morocco-oldcity-downtown-nightlights.jpg);
+	
+		}
+		.meal-container{
+			display: flex;
+		}
+		.meal-container img{
+			width: 400px;
+		}
+		.meal-container h3{
+			width: 400px;
+			color: aliceblue;
+		}
+		.meal-container ul{
+			width: 400px;
+			color: aliceblue;
+		}
+	</style>
+	<div class="meal-container"></div>	
+<script>
+	const meals = ['Chicken Couscous', 'Lamb Tagine', 'Lamb tomato and sweet spices', 'Moroccan Carrot Soup', 'Rigatoni with fennel sausage sauce', 'Spicy North African Potato Salad', 'Tahini Lentils'];
+	const mealContainer = document.querySelector('.meal-container');
+
+	meals.forEach(mealName => {
+	fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`)
+		.then(response => response.json())
+		.then(data => {
+		const mealData = data.meals[0];
+		const mealElement = document.createElement('div');
+		mealElement.classList.add('meal');
+		mealElement.innerHTML = `
+			<h3 class="meal-name">${mealData.strMeal}</h3>
+			<img class="meal-image" src="${mealData.strMealThumb}" alt="${mealData.strMeal}" ul class="meal-ingredients">
+			<ul class="meal-ingredients">
+			${getIngredientsList(mealData)}
+			</ul>
+		`;
+		mealContainer.appendChild(mealElement);
+		})
+		.catch(error => console.log(error));
+	});
+
+	function getIngredientsList(mealData) {
+	let ingredientsListHTML = '';
+	for (let i = 1; i <= 20; i++) {
+		const ingredient = mealData[`strIngredient${i}`];
+		const measure = mealData[`strMeasure${i}`];
+		if (ingredient && measure) {
+		ingredientsListHTML += `<li>${ingredient} - ${measure}</li>`;
+		}
+	}
+	return ingredientsListHTML;
+	}
+</script>	
+</center>  
+</body>
+</html>

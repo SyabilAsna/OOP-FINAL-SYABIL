@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  display: flex;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
+    url(https://wallpapers.com/images/hd/morocco-pink-sahara-desert-nuno81nc43h6wa3z.jpg);
+  justify-content: center;
+  align-items: center;
+  min-height: 140vh;
+  font-family: "poppins", sans-serif;
+}
+
+.box{
+  width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-gap:50px;
+  margin: 0 auto;
+}
+
+.card{
+  position: relative;
+  width: 300px;
+  height: 350px;
+  background-color: #fff;
+  margin: 0 auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.2);
+}
+
+.card .imgBx{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  bottom: 10px;
+  right: 10px;
+  background-color: #222;
+  transition: 0.5s;
+  z-index: 1;
+}
+
+.card .imgBx img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card:hover .imgBx{
+  bottom: 80px;
+}
+
+.card .details{
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  height: 60px;
+  text-align: center;
+}
+
+.card .details h2{
+  font-weight: 600;
+  font-size: 20px;
+  color: #777;
+  text-transform: uppercase;
+}
+
+.card .details h2 span{
+  font-weight: 500;
+  font-size: 14px;
+  color: #f38695;
+  display: block;
+}
+
+.card:before,
+.card:after{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  background: #fff;
+  transition: 0.5s;
+  z-index: -1;
+}
+
+.card:hover:before{
+  transform: rotate(20deg);
+  box-shadow: 0 2px 20px rgba(0,0,0,.2);
+}
+
+.card:hover:after{
+  transform: rotate(10deg);
+  box-shadow: 0 2px 20px rgba(0,0,0,.2);
+}
+</style>
+<body>
+  <div class="box">
+    <div class="card">
+      <div class="imgBx">
+        <img src="https://media.gq-magazine.co.uk/photos/5d138f50976fa31476f39436/master/pass/marrakech-gq-9oct18_istock_b.jpg" alt="">
+      </div>
+      <div class="details">
+        <h2><a href="https://en.wikipedia.org/wiki/Marrakesh">Marrakesh</a></h2>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="imgBx">
+        <img src="https://www.worldtravelguide.net/wp-content/uploads/2017/04/shu-Morocco-Fez-BabGuissaGate-598048292-Leonid-Andronov-copy.jpg" alt="">
+      </div>
+      <div class="details">
+        <h2><a href="https://en.wikipedia.org/wiki/Fez,_Morocco">Fes</a></h2>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="imgBx">
+        <img src="https://images.contentstack.io/v3/assets/blt00454ccee8f8fe6b/blt55ee7b6e47524da4/60ab221ab29743655f632fef/UK_Casablanca_Morocco_Header.jpg" alt="">
+      </div>
+      <div class="details">
+        <h2><a href="https://en.wikipedia.org/wiki/Casablanca">Casablanca</a></h2>
+      </div>
+    </div>
+    
+    <div class="card">
+        <div class="imgBx">
+          <img src="https://lp-cms-production.imgix.net/2019-06/56e4a8e265a1f7a3a246b85bcf88d672-essaouira.jpg" alt="">
+        </div>
+        <div class="details">
+          <h2><a href="https://en.wikipedia.org/wiki/Essaouira">Essaouira</a></h2>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="imgBx">
+          <img src="https://media.architecturaldigest.com/photos/5b9979433fa8bd423701e02e/2:1/w_3200,h_1600,c_limit/chefchaouen-hyper-blue-03.jpg" alt="">
+        </div>
+        <div class="details">
+          <h2><a href="https://en.wikipedia.org/wiki/Chefchaouen">Chefchaouen</a></h2>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="imgBx">
+          <img src="https://www.visitmorocco.com/sites/default/files/styles/thumbnail_events_slider/public/thumbnails/image/AGADIR-%287%29.jpg?itok=ECYn9u_b" alt="">
+        </div>
+        <div class="details">
+          <h2><a href="https://en.wikipedia.org/wiki/Agadir">Agadir</a></h2>
+        </div>
+      </div>
+  </div>
+</body>
+</html>
